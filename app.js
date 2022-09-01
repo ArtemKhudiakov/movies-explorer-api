@@ -2,10 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const routes = require('./routes/index')
 const { errors } = require('celebrate');
+const routes = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
 
 const corsUrl = [
   // 'https://artemkhudiakov.nomoredomains.sbs',
@@ -57,5 +56,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/moviesdb', {
 });
 
 app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
   console.log(`Working Port ${PORT}`);
 });
