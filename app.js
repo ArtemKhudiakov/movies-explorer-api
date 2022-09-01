@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 // const helmet = require('helmet');
-const limiter = require('./utils/rateLimit');
+// const limiter = require('./utils/rateLimit');
 const routes = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -36,7 +36,7 @@ app.use((req, res, next) => {
   }
   next();
 });
-app.use(limiter);
+// app.use(limiter);
 // app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
