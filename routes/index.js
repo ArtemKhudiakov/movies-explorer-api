@@ -13,7 +13,7 @@ const {
 router.post('/signin', validateLogin, login);
 router.post('/signup', validateCreateUser, createUser);
 
-// router.use(auth);
+router.use(auth);
 
 router.use('/users', userRouter);
 router.use('/movies', movieRouter);

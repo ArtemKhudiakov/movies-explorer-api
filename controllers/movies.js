@@ -15,11 +15,11 @@ const getMovies = (req, res, next) => {
 const createMovie = (req, res, next) => {
   const { country, director, duration, year, description, image, trailerLink, thumbnail, movieId, nameRU, nameEN } = req.body;
   const owner = req.user._id;
-  Movie.create({country, director, duration, year, description, image, trailerLink, thumbnail, movieId, nameRU, nameEN, owner })
+  Movie.create({ country, director, duration, year, description, image, trailerLink, thumbnail, movieId, nameRU, nameEN, owner })
     .then((movie) => res.send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Данные не прошли валидацию'));
+        next(new BadRequestError('Данные не прошли валидацию1'));
       } else {
         next(err);
       }
@@ -28,7 +28,7 @@ const createMovie = (req, res, next) => {
 
 const deleteMovie = (req, res, next) => {
   Movie.findById(req.params.movieId)
-    .orFail(() => new NotFoundError('Карточка с id не существует'))
+    .orFail(() => new NotFoundError('Фильм с id не существует'))
     .then((movie) => {
       if (!movie.owner.equals(req.user._id)) {
         return next(new ForbiddenError('Недостаточно прав для удаления карточки'));

@@ -4,16 +4,14 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const routes = require('./routes/index')
 const { errors } = require('celebrate');
-const { login, createUser } = require('./controllers/users');
-
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 
 const corsUrl = [
   // 'https://artemkhudiakov.nomoredomains.sbs',
   // 'http://artemkhudiakov.nomoredomains.sbs',
-  // 'http://localhost:3000',
-  // 'https://locahost:3000',
+  'http://localhost:3000',
+  'https://locahost:3000',
 ];
 
 const { PORT = 3000 } = process.env;

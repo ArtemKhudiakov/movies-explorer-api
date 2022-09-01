@@ -10,7 +10,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 
 const getCurrentUser = (req, res, next) => {
   const id = req.user._id;
-  return User.findById(id)
+   return User.findById(id)
     .then((user) => {
       res.send(user);
     })
