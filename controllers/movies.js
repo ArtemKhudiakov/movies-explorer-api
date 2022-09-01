@@ -40,46 +40,6 @@ const deleteMovie = (req, res, next) => {
     .catch(next);
 };
 
-// const likeCard = (req, res, next) => {
-//   Card.findByIdAndUpdate(
-//     req.params.cardId,
-//     { $addToSet: { likes: req.user._id } },
-//     { new: true },
-//   ).then((card) => {
-//     if (!card) {
-//       throw new NotFoundError('Карточка с указанным id не найдена');
-//     }
-//     res.send(card);
-//   })
-//     .catch((err) => {
-//       if (err.name === 'ValidationError') {
-//         next(new BadRequestError('Данные не прошли валидацию'));
-//       } else {
-//         next(err);
-//       }
-//     });
-// };
-
-// const dislikeCard = (req, res, next) => {
-//   Card.findByIdAndUpdate(
-//     req.params.cardId,
-//     { $pull: { likes: req.user._id } },
-//     { new: true },
-//   ).then((card) => {
-//     if (!card) {
-//       throw new NotFoundError('Карточка с указанным id не найдена');
-//     }
-//     res.send(card);
-//   })
-//     .catch((err) => {
-//       if (err.name === 'ValidationError') {
-//         next(new BadRequestError('Данные не прошли валидацию'));
-//       } else {
-//         next(err);
-//       }
-//     });
-// };
-
 module.exports = {
   getMovies,
   createMovie,
