@@ -45,7 +45,7 @@ const createMovie = (req, res, next) => {
     .then((movie) => res.send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Данные не прошли валидацию1'));
+        next(new BadRequestError('Данные не прошли валидацию'));
       } else {
         next(err);
       }
@@ -57,10 +57,10 @@ const deleteMovie = (req, res, next) => {
     .orFail(() => new NotFoundError('Фильм с id не существует'))
     .then((movie) => {
       if (!movie.owner.equals(req.user._id)) {
-        return next(new ForbiddenError('Недостаточно прав для удаления карточки'));
+        return next(new ForbiddenError('Недостаточно прав для удаления фильма'));
       }
       return movie.remove()
-        .then(() => res.send({ message: 'Карточка удалена' }));
+        .then(() => res.send({ message: 'Фильм удален' }));
     })
     .catch(next);
 };

@@ -3,12 +3,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
+const helmet = require('helmet');
+const limiter = require('./utils/rateLimit');
 const routes = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const corsUrl = [
-  // 'https://artemkhudiakov.nomoredomains.sbs',
-  // 'http://artemkhudiakov.nomoredomains.sbs',
+  'https://artemmovies.nomoredomains.sbs',
+  'http://artemmovies.nomoredomains.sbs',
   'http://localhost:3000',
   'https://locahost:3000',
 ];
@@ -34,7 +36,8 @@ app.use((req, res, next) => {
   }
   next();
 });
-
+app.use(limiter);
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
