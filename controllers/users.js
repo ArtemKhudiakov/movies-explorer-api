@@ -73,30 +73,17 @@ const updateUserInfo = (req, res, next) => {
       res.send(user);
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') {
-        next(BadRequestError('Валидация на сервере не пройдена'));
-      } else {
-        next(err);
+      if (err.code === 11000) {
+        next(new ConflictError('Пользователь с таким email уже существует'));
+        return;
       }
+      if (err.name === 'ValidationError') {
+        next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
+        return;
+      }
+      next(err);
     });
 };
-
-// const getUser = (req, res, next) => {
-//   User.findById(req.params._id)
-//     .then((user) => {
-//       if (!user) {
-//         throw new NotFoundError('Пользователь с таким id не существует');
-//       }
-//       res.send(user);
-//     })
-//     .catch((err) => {
-//       if (err.name === 'CastError') {
-//         next(new BadRequestError('Неверно указан id'));
-//         return;
-//       }
-//       next(err);
-//     });
-// };
 
 module.exports = {
   createUser,
