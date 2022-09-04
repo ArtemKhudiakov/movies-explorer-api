@@ -1,10 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const { errors } = require('celebrate');
 const helmet = require('helmet');
 const limiter = require('./utils/rateLimit');
+const bodyParser = require('body-parser');
+const { errors } = require('celebrate');
 const routes = require('./routes/index');
 const cors = require('./utils/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -15,11 +15,14 @@ const { PORT, MONGODB_DEV } = require('./utils/env-config');
 const app = express();
 const errorHandler = require('./middlewares/errors');
 
-app.use(cors);
 app.use(limiter);
 app.use(helmet());
+
+app.use(cors);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(requestLogger);
 
 app.use(routes);
