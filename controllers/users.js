@@ -5,6 +5,7 @@ const BadRequestError = require('../error/badrequest-error');
 const ConflictError = require('../error/conflict-error');
 const AuthError = require('../error/auth-error');
 const User = require('../models/users');
+const { CONFLICT_ERR, BAD_REQUEST_ERR, AUTH_ERR } = require('../utils/constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -34,11 +35,11 @@ const createUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.code === 11000) {
-        next(new ConflictError('Пользователь с таким email уже существует'));
+        next(new ConflictError(CONFLICT_ERR));
         return;
       }
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
+        next(new BadRequestError(BAD_REQUEST_ERR));
         return;
       }
       next(err);
@@ -61,7 +62,7 @@ const login = (req, res, next) => {
       }).send({ token });
     })
     .catch(() => {
-      next(new AuthError('Неправильная почта или пароль.'));
+      next(new AuthError(AUTH_ERR));
     });
 };
 
@@ -74,11 +75,11 @@ const updateUserInfo = (req, res, next) => {
     })
     .catch((err) => {
       if (err.code === 11000) {
-        next(new ConflictError('Пользователь с таким email уже существует'));
+        next(new ConflictError(CONFLICT_ERR));
         return;
       }
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
+        next(new BadRequestError(BAD_REQUEST_ERR));
         return;
       }
       next(err);
