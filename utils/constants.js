@@ -1,6 +1,6 @@
 const CORS_URL = [
-  'https://artemmovies.nomoredomains.sbs',
-  'http://artemmovies.nomoredomains.sbs',
+  'https://artemmovies.nomoredomains.icu',
+  'http://artemmovies.nomoredomains.icu',
   'https://api.artemmovies.nomoredomains.sbs',
   'http://api.artemmovies.nomoredomains.sbs',
   'http://localhost:3000',
